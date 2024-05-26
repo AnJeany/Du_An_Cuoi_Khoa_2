@@ -46,15 +46,15 @@ public class shooting : MonoBehaviour
         {
             canFire = false;
             GameObject bulletInstance = Instantiate(bullet, bulletTransform.position, Quaternion.identity);
-            StartCoroutine(DeleteBullet(bulletInstance));
+            //StartCoroutine(DeleteBullet(bulletInstance));
         }
     }
 
     
-    IEnumerator DeleteBullet(GameObject bulletInstance)
-    {
-        yield return new WaitForSeconds(timeDestroyBullet);
-        Destroy(bulletInstance);
-    }
+    //IEnumerator DeleteBullet(GameObject bulletInstance)
+    //{
+    //    yield return new WaitForSeconds(timeDestroyBullet);
+    //    Destroy(bulletInstance);
+    //}
     
 }

@@ -11,7 +11,6 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private float distance;
     [SerializeField] private LayerMask collisionLayer;
-    [SerializeField] Character attackToEnemy;
 
     private bool canDealDamage = true;
     private Vector3 mousePos;
@@ -30,11 +29,7 @@ public class BulletScript : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
-        if (attackToEnemy == null)
-        {
-            attackToEnemy = GameObject.FindGameObjectWithTag("Enemy").GetComponentInChildren<Character>();
-        }
-
+ 
     }
     void FixedUpdate()
     {
@@ -57,9 +52,18 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.TryGetComponent<BasicEnemy>(out  BasicEnemy enemy))
+        {
+            enemy.TakeDamage(bulletDamage);
+        }
+        Destroy(gameObject);
+    }
+
     private void AttackEnemy()
     {
-        attackToEnemy.TakeDamage(bulletDamage);
+
         canDealDamage = false;
         StartCoroutine(DamageCooldown());
     }
