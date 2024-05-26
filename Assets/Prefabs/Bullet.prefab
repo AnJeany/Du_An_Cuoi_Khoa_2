@@ -98,12 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c328121943f8fb48b524e40b02876ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.1
-  distance: 0.1
+  bulletDamage: 5
+  attackCooldown: 0.5
+  radius: 0.2
+  distance: 0.2
   collisionLayer:
     serializedVersion: 2
     m_Bits: 64
-  force: 3
+  force: 10
+  timeDestroyBullet: 5
 --- !u!50 &-8702739333346325348
 Rigidbody2D:
   serializedVersion: 4

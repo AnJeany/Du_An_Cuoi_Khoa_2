@@ -66,7 +66,7 @@ public class BasicEnemy : MonoBehaviour
         canAttack = false;
         StartCoroutine(AttackCoolDown());
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         curentHp -= damage;
         if (curentHp <= 0)
