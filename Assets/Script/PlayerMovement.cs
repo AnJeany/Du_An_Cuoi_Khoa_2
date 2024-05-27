@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
 
-    private Vector2 movement;
+    public Vector2 movement;
     private float speed = 8f;
     private bool isFacingRight = true;
 
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -45,7 +46,9 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        //Flip();
+        Flip();
+        animator.SetFloat("Speed", Mathf.Abs(movement.x));
+        animator.SetFloat("SpeedVertical", Mathf.Abs(movement.y));
     }
 
 
@@ -62,16 +65,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //private void Flip()
-    //{
-    //    if (isFacingRight && movement.x < 0f || !isFacingRight && movement.x > 0f)
-    //    {
-    //        Vector3 localScale = transform.localScale;
-    //        isFacingRight = !isFacingRight;
-    //        localScale.x *= -1f;
-    //        transform.localScale = localScale;
-    //    }
-    //}
+    private void Flip()
+    {
+        if (isFacingRight && movement.x < 0f || !isFacingRight && movement.x > 0f)
+        {
+            Vector3 localScale = transform.localScale;
+            isFacingRight = !isFacingRight;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
+    }
 
     private IEnumerator Dash()
     {
