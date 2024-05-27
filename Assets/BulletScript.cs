@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class BulletScript : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class BulletScript : MonoBehaviour
     private Vector2 direction;
     [SerializeField] private float radius;
     [SerializeField] private float distance;
-    [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] private LayerMask enemyLayer;
 
     private bool canDealDamage = true;
     private Vector3 mousePos;
@@ -38,28 +40,31 @@ public class BulletScript : MonoBehaviour
 
     public void CheckCollision()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction, distance, collisionLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction, distance, enemyLayer);
         if (hit.collider != null)
         {
-            Debug.Log("Hit: ");
-            //StartCoroutine(DeleteBullet(bulletInstance));
+            // Kiểm tra xem đối tượng va chạm có script Enemy không
             BasicEnemy enemy = hit.collider.GetComponent<BasicEnemy>();
-            if (enemy != null && canDealDamage)
+            if (enemy != null)
             {
-                AttackEnemy();
+                // Gọi hàm TakeDamage của enemy
+                enemy.TakeDamage(bulletDamage);
+
+                // Hủy viên đạn
+                Destroy(gameObject);
             }
-            Destroy(gameObject); // Hủy viên đạn ngay khi va chạm
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.TryGetComponent<BasicEnemy>(out  BasicEnemy enemy))
-        {
-            enemy.TakeDamage(bulletDamage);
-        }
-        Destroy(gameObject);
-    }
+    //private void OnCollisionEnter2D(Collision2D col)
+    //{
+    //    BasicEnemy enemy = col.collider.GetComponent<BasicEnemy>();
+    //    if (col.gameObject.layer == 6)
+    //    {
+    //        enemy.TakeDamage(bulletDamage);
+    //    }
+    //    Destroy(gameObject);
+    //}
 
     private void AttackEnemy()
     {
@@ -79,11 +84,6 @@ public class BulletScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + (Vector3)direction * distance, radius);
     }
 
-    IEnumerator DeleteBullet(GameObject bulletInstance)
-    {
-        yield return new WaitForSeconds(timeDestroyBullet);
-        Destroy(gameObject);
-    }
     IEnumerator DamageCooldown()
     {
         canDealDamage = false;

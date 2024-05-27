@@ -34,19 +34,6 @@ public class EnemySpawner : MonoBehaviour
             // Gán mục tiêu cho kẻ địch
             BasicEnemy enemyScript = enemy.GetComponent<BasicEnemy>();
 
-            if (enemyScript != null)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null)
-                {
-                    enemyScript.targetDestination = playerTransform;
-                    enemyScript.SetTargetGameObject(); // Gọi SetTargetGameObject sau khi gán targetDestination
-                }
-            }
-            else
-            {
-                Debug.LogError("Prefab không có component BasicEnemy");
-            }
 
             // Giảm thời gian spawn nếu chưa đạt đến giới hạn tối thiểu
             if (currentSpawnTime > minSpawnTime)

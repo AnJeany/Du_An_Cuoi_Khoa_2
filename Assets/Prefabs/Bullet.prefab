@@ -102,7 +102,7 @@ MonoBehaviour:
   attackCooldown: 0.5
   radius: 0.2
   distance: 0.2
-  collisionLayer:
+  enemyLayer:
     serializedVersion: 2
     m_Bits: 64
   force: 10

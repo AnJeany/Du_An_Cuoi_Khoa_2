@@ -2,7 +2,6 @@
 using UnityEngine;
 public class BasicEnemy : MonoBehaviour
 {
-    [SerializeField] public Transform targetDestination;
     [SerializeField] private float speed;
     [SerializeField] private Transform enemyPosition;
     [SerializeField] private float radius;
@@ -13,30 +12,30 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private float damage = 10f;
     [SerializeField] private float attackCoolDown;
     private bool canAttack = true;
-    GameObject targetGameObject;
     [SerializeField] Character targetCharacter;
     GameObject enemy;
     Rigidbody2D rb;
     private Vector2 direction;
+
+    private void Start()
+    {
+        targetCharacter = PlayerMovement.Instance.GetComponent<Character>();
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        enemy = enemyPosition.gameObject;
-        if (targetCharacter == null)
-        {
-            targetCharacter = GameObject.FindWithTag("Player").GetComponent<Character>();
-        }
+        enemy = enemyPosition.gameObject;     
     }
-    public void SetTargetGameObject()
+    //public void SetTargetGameObject()
+    //{
+    //    targetGameObject = targetDestination.gameObject;
+    //}
+    private void Update()
     {
-        targetGameObject = targetDestination.gameObject;
-    }
-    private void FixedUpdate()
-    {
-        if (targetDestination != null)
+        if (targetCharacter != null)
         {
             // Di chuyển kẻ địch về phía mục tiêu
-            Vector3 direction = (targetDestination.position - transform.position).normalized;
+            Vector3 direction = (targetCharacter.transform.position - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
         }
         CheckCollision();

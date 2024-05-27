@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     private Vector2 movement;
     private float speed = 8f;
     private bool isFacingRight = true;
@@ -21,6 +23,11 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+            
     }
 
     private void Update()
