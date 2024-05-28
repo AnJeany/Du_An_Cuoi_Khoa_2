@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
         {
             isDead = true;
             Debug.Log("Player is dead GAME OVER");
+            Time.timeScale = 0;
         }
 
     }

@@ -67,10 +67,12 @@ public class BasicEnemy : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        ScoreScript scoreScript = new ScoreScript();
         curentHp -= damage;
         if (curentHp <= 0)
         {
             Destroy(gameObject);
+            ScoreScript.instance.AddScore();
         }
     }
     IEnumerator AttackCoolDown()
