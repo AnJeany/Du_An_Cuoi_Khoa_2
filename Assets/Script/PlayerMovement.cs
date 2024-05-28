@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    //[SerializeField] private TrailRenderer tr;
     [SerializeField] private Animator animator;
 
     private void Awake()
@@ -95,15 +94,11 @@ public class PlayerMovement : MonoBehaviour
 
         // Gán vận tốc dựa trên hướng
         rb.velocity = dashDirection * dashingPower;
-
-        //tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
-        //tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
-        //bat tu tat boxcolider
-        //ani bat tu to alpha
+
     }
 }

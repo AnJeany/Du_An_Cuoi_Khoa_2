@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 public class BasicEnemy : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class BasicEnemy : MonoBehaviour
     GameObject enemy;
     Rigidbody2D rb;
     private Vector2 direction;
+
 
     private void Start()
     {
@@ -67,7 +69,8 @@ public class BasicEnemy : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        ScoreScript scoreScript = new ScoreScript();
+       // ScoreScript scoreScript = new ScoreScript();
+
         curentHp -= damage;
         if (curentHp <= 0)
         {

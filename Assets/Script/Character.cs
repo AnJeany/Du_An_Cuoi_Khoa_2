@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     [SerializeField] private float currentHp;
     private bool isDead;
 
+
     private void Update()
     {
         if (isDead && currentHp <= 0)
@@ -24,8 +25,14 @@ public class Character : MonoBehaviour
         {
             isDead = true;
             Debug.Log("Player is dead GAME OVER");
-            //Time.timeScale = 0;
+            //spritePlayer.SetActive(false);
+            Dead();
         }
 
+    }
+
+    public void Dead()
+    {
+        Time.timeScale = 0;
     }
 }
