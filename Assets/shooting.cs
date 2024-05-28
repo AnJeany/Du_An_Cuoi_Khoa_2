@@ -45,7 +45,7 @@ public class shooting : MonoBehaviour
         if (Input.GetMouseButton(0) && canFire)
         {
             canFire = false;
-            GameObject bulletInstance = Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            GameObject bulletInstance = Instantiate(bullet, bulletTransform.position, gameObject.transform.rotation);
             StartCoroutine(DeleteBullet(bulletInstance));
         }
     }
