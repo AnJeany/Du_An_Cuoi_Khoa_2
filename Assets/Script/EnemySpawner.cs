@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
             // Gán mục tiêu cho kẻ địch
-            MeleEnemy enemyScript = enemy.GetComponent<MeleEnemy>();
+            MeleEnemyDataDemo enemyScript = enemy.GetComponent<MeleEnemyDataDemo>();
 
 
             // Giảm thời gian spawn nếu chưa đạt đến giới hạn tối thiểu

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
-public class MeleEnemy : MonoBehaviour
+public class MeleEnemyDataDemo : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Transform enemyPosition;

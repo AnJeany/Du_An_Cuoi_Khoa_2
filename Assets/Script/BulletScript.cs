@@ -35,26 +35,25 @@ public class BulletScript : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //CheckCollision();
-        //OnCollisionEnter();
+        CheckCollision();
     }
-    //public void CheckCollision()
-    //{
-    //    RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction, distance, enemyLayer);
-    //    if (hit.collider != null)
-    //    {
-    //        // Kiểm tra xem đối tượng va chạm có script EnemyTakeDamage không
-    //        MeleEnemy enemy = hit.collider.GetComponent<MeleEnemy>();
-    //        if (enemy != null)
-    //        {
-    //            // Gọi hàm EnemyTakeDamage của enemy
-    //            enemy.EnemyTakeDamage(bulletDamage);
+    public void CheckCollision()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction, distance, enemyLayer);
+        if (hit.collider != null)
+        {
+            // Kiểm tra xem đối tượng va chạm có script EnemyTakeDamage(BasicEnemy) không
+            BasicEnemy enemy = hit.collider.GetComponent<BasicEnemy>();
+            if (enemy != null)
+            {
+                // Gọi hàm EnemyTakeDamage của enemy
+                enemy.EnemyTakeDamage(bulletDamage);
 
-    //            // Hủy viên đạn
-    //            Destroy(gameObject);
-    //        }
-    //    }
-    //}
+                // Hủy viên đạn
+                Destroy(gameObject);
+            }
+        }
+    }
     private void AttackEnemy()
     {
         canDealDamage = false;
@@ -79,20 +78,4 @@ public class BulletScript : MonoBehaviour
         canDealDamage = true;
     }
 
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Enemy")
-        {
-            //Kiểm tra xem đối tượng va chạm có script EnemyTakeDamage không
-            MeleEnemy enemy = col.collider.GetComponent<MeleEnemy>();
-            if (enemy != null)
-            {
-                // Gọi hàm EnemyTakeDamage của enemy
-                enemy.EnemyTakeDamage(bulletDamage);
-
-                // Hủy viên đạn
-                Destroy(gameObject);
-            }
-        }
-    }
 }
