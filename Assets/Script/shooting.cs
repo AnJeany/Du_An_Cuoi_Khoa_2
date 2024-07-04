@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class shooting : MonoBehaviour
 {
-    
     [SerializeField] private float timeDestroyBullet;
     private Camera mainCam;
     private Vector3 mousePos;
@@ -15,14 +14,12 @@ public class shooting : MonoBehaviour
     public bool canFire;
     private float timer;
     public float timeBetweenFiring;
-    
 
     // Start is called before the first frame update
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {

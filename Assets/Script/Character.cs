@@ -8,8 +8,10 @@ public class Character : MonoBehaviour
     [SerializeField] private float maxHp;
     [SerializeField] private float currentHp;
     private bool isDead;
-
-
+    private void Start()
+    {
+        maxHp = currentHp;
+    }
     private void Update()
     {
         if (isDead && currentHp <= 0)
@@ -17,8 +19,7 @@ public class Character : MonoBehaviour
             gameManager.GameOver();
         }
     }
-
-    public void TakeDamage (float damage)
+    public void PlayerTakeDamage (float damage)
     {
         currentHp -= damage;
         if (currentHp <= 0 && !isDead)
@@ -28,9 +29,7 @@ public class Character : MonoBehaviour
             //spritePlayer.SetActive(false);
             Dead();
         }
-
     }
-
     public void Dead()
     {
         Time.timeScale = 0;

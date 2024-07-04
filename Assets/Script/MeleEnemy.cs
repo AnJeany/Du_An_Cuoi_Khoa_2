@@ -1,24 +1,30 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
-public class BasicEnemy : MonoBehaviour
+public class MeleEnemy : MonoBehaviour
 {
-    GameObject enemy;
-    [SerializeField] Character targetCharacter;
+    [SerializeField] private float speed;
     [SerializeField] private Transform enemyPosition;
+    [SerializeField] private float radius;
+    [SerializeField] private float distance;
     [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] private float maxHp = 10;
     [SerializeField] private float curentHp = 10;
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private float attackCoolDown;
     private bool canAttack = true;
-    [SerializeField] EnemyData enemyData;
+    [SerializeField] Character targetCharacter;
+    GameObject enemy;
+    Rigidbody2D rb;
+    private Vector2 direction;
     private void Start()
     {
         targetCharacter = PlayerMovement.Instance.GetComponent<Character>();
     }
     private void Awake()
     {
-        //rb = GetComponent<Rigidbody2D>();
-        enemy = enemyPosition.gameObject;
+        rb = GetComponent<Rigidbody2D>();
+        enemy = enemyPosition.gameObject;     
     }
     private void Update()
     {
@@ -26,36 +32,36 @@ public class BasicEnemy : MonoBehaviour
         {
             // Di chuyển kẻ địch về phía mục tiêu
             Vector3 direction = (targetCharacter.transform.position - transform.position).normalized;
-            transform.position += direction * enemyData.Speed * Time.deltaTime;
+            transform.position += direction * speed * Time.deltaTime;
         }
         CheckCollision();
     }
     public void CheckCollision()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, enemyData.Radius, enemyData.Direction, enemyData.Distance, collisionLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction, distance, collisionLayer);
         if (hit.collider != null && canAttack)
         {
-            Attack();
+            EnemyAttack();
         }
     }
     void OnDrawGizmos()
     {
         // Vẽ vòng tròn tại vị trí hiện tại của đối tượng
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyData.Radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
 
         // Vẽ đường di chuyển của CircleCast
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)enemyData.Direction * enemyData.Distance);
-        Gizmos.DrawWireSphere(transform.position + (Vector3)enemyData.Direction * enemyData.Distance, enemyData.Radius);
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)direction * distance);
+        Gizmos.DrawWireSphere(transform.position + (Vector3)direction * distance, radius);
     }
-    private void Attack()
+    private void EnemyAttack() //enemy gay damage
     {
-        targetCharacter.PlayerTakeDamage(enemyData.Damage);
+        targetCharacter.PlayerTakeDamage(damage);
         canAttack = false;
         StartCoroutine(AttackCoolDown());
     }
-    public void EnemyTakeDamage(float damage)
+    public void EnemyTakeDamage(float damage) //enemy nhan damaga
     {
         curentHp -= damage;
         if (curentHp <= 0)
@@ -66,7 +72,7 @@ public class BasicEnemy : MonoBehaviour
     }
     IEnumerator AttackCoolDown()
     {
-        yield return new WaitForSeconds(enemyData.AttackCoolDown);
+        yield return new WaitForSeconds(attackCoolDown);
         canAttack = true;
     }
 }

@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private float dashingCooldown = 1f;
 
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    //[SerializeField] private Transform groundCheck;
+    //[SerializeField] private LayerMask groundLayer;
     [SerializeField] private Animator animator;
 
     private void Awake()
@@ -26,8 +26,7 @@ public class PlayerMovement : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-        }
-            
+        } 
     }
 
     private void Update()
@@ -36,15 +35,12 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
         }
-
         Flip();
         animator.SetFloat("Speed", Mathf.Abs(movement.x));
         animator.SetFloat("SpeedVertical", Mathf.Abs(movement.y));

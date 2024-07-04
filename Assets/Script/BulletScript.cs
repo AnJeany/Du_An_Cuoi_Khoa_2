@@ -6,14 +6,14 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private float bulletDamage = 5f; // Thêm biến gây sát thương
-    [SerializeField] private float attackCooldown = 0.5f; // Thêm biến thời gian hồi
     GameObject bulletInstance;
-    private Vector2 direction;
+    [SerializeField] private float bulletDamage = 5f; // Thêm biến gây sát thương
+    [SerializeField] private float attackCooldown = 0.5f; // Thêm biến thời gian hồi      
     [SerializeField] private float radius;
     [SerializeField] private float distance;
     [SerializeField] private LayerMask enemyLayer;
 
+    private Vector2 direction;
     private bool canDealDamage = true;
     private Vector3 mousePos;
     private Camera mainCam;
@@ -35,40 +35,28 @@ public class BulletScript : MonoBehaviour
     }
     void FixedUpdate()
     {
-        CheckCollision();
+        //CheckCollision();
+        //OnCollisionEnter();
     }
-
-    public void CheckCollision()
-    {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction, distance, enemyLayer);
-        if (hit.collider != null)
-        {
-            // Kiểm tra xem đối tượng va chạm có script Enemy không
-            BasicEnemy enemy = hit.collider.GetComponent<BasicEnemy>();
-            if (enemy != null)
-            {
-                // Gọi hàm TakeDamage của enemy
-                enemy.TakeDamage(bulletDamage);
-
-                // Hủy viên đạn
-                Destroy(gameObject);
-            }
-        }
-    }
-
-    //private void OnCollisionEnter2D(Collision2D col)
+    //public void CheckCollision()
     //{
-    //    BasicEnemy enemy = col.collider.GetComponent<BasicEnemy>();
-    //    if (col.gameObject.layer == 6)
+    //    RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction, distance, enemyLayer);
+    //    if (hit.collider != null)
     //    {
-    //        enemy.TakeDamage(bulletDamage);
-    //    }
-    //    Destroy(gameObject);
-    //}
+    //        // Kiểm tra xem đối tượng va chạm có script EnemyTakeDamage không
+    //        MeleEnemy enemy = hit.collider.GetComponent<MeleEnemy>();
+    //        if (enemy != null)
+    //        {
+    //            // Gọi hàm EnemyTakeDamage của enemy
+    //            enemy.EnemyTakeDamage(bulletDamage);
 
+    //            // Hủy viên đạn
+    //            Destroy(gameObject);
+    //        }
+    //    }
+    //}
     private void AttackEnemy()
     {
-
         canDealDamage = false;
         StartCoroutine(DamageCooldown());
     }
@@ -91,4 +79,20 @@ public class BulletScript : MonoBehaviour
         canDealDamage = true;
     }
 
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            //Kiểm tra xem đối tượng va chạm có script EnemyTakeDamage không
+            MeleEnemy enemy = col.collider.GetComponent<MeleEnemy>();
+            if (enemy != null)
+            {
+                // Gọi hàm EnemyTakeDamage của enemy
+                enemy.EnemyTakeDamage(bulletDamage);
+
+                // Hủy viên đạn
+                Destroy(gameObject);
+            }
+        }
+    }
 }

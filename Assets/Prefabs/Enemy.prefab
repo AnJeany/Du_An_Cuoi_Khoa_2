@@ -180,7 +180,7 @@ MonoBehaviour:
   speed: 3
   enemyPosition: {fileID: 2913955730134295575}
   radius: 0.67
-  distance: 0.67
+  distance: 0.61
   collisionLayer:
     serializedVersion: 2
     m_Bits: 128
