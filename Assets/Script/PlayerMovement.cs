@@ -5,6 +5,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
 
+    public Vector2 moveDir;
+    public Vector2 direction;
     public Vector2 movement;
     private float speed = 8f;
     private bool isFacingRight = true;
@@ -14,10 +16,9 @@ public class PlayerMovement : MonoBehaviour
     private float dashingPower = 24f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
+    
 
     [SerializeField] private Rigidbody2D rb;
-    //[SerializeField] private Transform groundCheck;
-    //[SerializeField] private LayerMask groundLayer;
     [SerializeField] private Animator animator;
 
     private void Awake()
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        InputManager();
         if (isDashing)
         {
             return;
@@ -46,7 +48,13 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("SpeedVertical", Mathf.Abs(movement.y));
     }
 
+    public void InputManager()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
 
+        moveDir = new Vector2(moveX, moveY).normalized;
+    }
 
     private void FixedUpdate()
     {
@@ -55,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Vector2 direction = movement.normalized;
+        direction = movement.normalized;
         rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
     }
 
