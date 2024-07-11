@@ -520,6 +520,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 866564867635963971, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
   m_PrefabInstance: {fileID: 1026011513930433055}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &479256020 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 79976186187174892, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
+  m_PrefabInstance: {fileID: 1026011513930433055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &489780913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489780914}
+  - component: {fileID: 489780915}
+  m_Layer: 7
+  m_Name: Garlic Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489780914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489780913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 479256020}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &489780915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489780913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1821e7f8ef1c9a7438bd8a71239650e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7255649478864764728, guid: fb970b8d0d78c2d44b6ce1e848e2cb5c, type: 3}
+  damage: 0
+  speed: 0
+  cooldownDuration: 3
+  pierce: 0
 --- !u!1 &642790332
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +833,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e66f966f3ad2c149b00087c9a42e4a9, type: 3}
+--- !u!1 &1280788791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1280788792}
+  - component: {fileID: 1280788793}
+  m_Layer: 7
+  m_Name: Knife Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1280788792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280788791}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 479256020}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1280788793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280788791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1626b33b7fa01f342aed735e47544d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1369336974806443685, guid: 7b16f1f4dceffe64790641170ee13d95, type: 3}
+  damage: 0
+  speed: 10
+  cooldownDuration: 3
+  pierce: 0
 --- !u!1 &1372252416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,9 +1433,27 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1443477248}
+    - target: {fileID: 6614652532543343323, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614652532543343323, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614652532543343323, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1247238503
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 79976186187174892, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1280788792}
+    - targetCorrespondingSourceObject: {fileID: 79976186187174892, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 489780914}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6468ad227629fa42835ee5ea9a30589, type: 3}
 --- !u!1660057539 &9223372036854775807
